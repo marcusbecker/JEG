@@ -27,15 +27,17 @@ public class GraphicTool {
 	 * 
 	 * @param e
 	 * @param em
-	 * @return
+	 * @return null se nao houve colisao
 	 */
 	public ElementModel collide(ElementModel e, ElementModel em) {
 		if (e == null || em == null || e == em) {
 			return e;
 		}
+		
 		if (!e.isEnabled() || !em.isEnabled()) {
 			return null;
 		}
+		
 		if (intersecElement(e, em)) {
 			return em;
 		}

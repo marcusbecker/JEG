@@ -31,4 +31,8 @@ public interface IWindowGame {
 	@Deprecated
 	public ElementMovableModel getMovableElement();
 
+	public int getCanvasWidth();
+
+	public int getCanvasHeight();
+
 }

@@ -19,7 +19,6 @@ public class Engine {
 	private static boolean pausedGame = Boolean.FALSE;
 	public static boolean DEBUG_MODE = Boolean.FALSE;
 	public static boolean FREEZE = Boolean.TRUE;
-	public static final int fps = 40;
 	public static IWindowGame window;
 	public static ClassLoader cldr;
 	public static boolean gameLoop = Boolean.TRUE;
@@ -38,7 +37,6 @@ public class Engine {
 		log("drawGrid ", drawGrid);// Boolean.FALSE;
 		log("endGame ", endGame);// Boolean.TRUE;
 		log("pausedGame ", pausedGame);// Boolean.FALSE;
-		log("fps ", fps);// 20;
 		log("DEBUG_MODE ", DEBUG_MODE);// Boolean.TRUE;
 		log("gameLoop ", gameLoop);// Boolean.TRUE;
 		log("multhread ", multhread);// false;

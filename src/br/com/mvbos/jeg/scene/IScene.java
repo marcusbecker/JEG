@@ -1,5 +1,6 @@
 package br.com.mvbos.jeg.scene;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import br.com.mvbos.jeg.element.ElementModel;
@@ -39,6 +40,8 @@ public interface IScene {
 	public void selectElement(ElementModel[] arr);
 
 	public void mouseMove(ElementModel e, Click m);
+	
+	public void keyEvent(char keyChar, int keyCode);
 
 	public void setTitle(String title);
 
@@ -60,5 +63,10 @@ public interface IScene {
 	 * Chamado ao finalizar load
 	 */
 	public void startGame();
+	
+	public Color getBgColor();
+	
+	
+	public void resizeWindow();
 
 }

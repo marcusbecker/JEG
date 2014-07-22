@@ -29,6 +29,7 @@ public class ElementModel {
 	private Color defaultColor = Color.BLUE;
 
 	public void loadElement() {
+		Engine.log("Nothing to load.");
 	}
 
 	public ElementModel() {
@@ -303,8 +304,8 @@ public class ElementModel {
 	 * Define a imagem e seta os valores de largura e altura com base nas
 	 * dimensoes da imagem
 	 */
-	public void setImageAndSize(ImageIcon bitmap) {
-		setImage(bitmap);
+	public void setImageAndSize(ImageIcon image) {
+		setImage(image);
 		copyImgeSize();
 	}
 

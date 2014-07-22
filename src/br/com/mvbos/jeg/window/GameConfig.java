@@ -1,6 +1,5 @@
 package br.com.mvbos.jeg.window;
 
-import br.com.mvbos.jeg.engine.Engine;
 
 @Deprecated
 /**

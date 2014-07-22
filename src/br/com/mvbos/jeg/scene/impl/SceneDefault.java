@@ -1,5 +1,6 @@
 package br.com.mvbos.jeg.scene.impl;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
 
@@ -27,7 +28,7 @@ public class SceneDefault implements IScene {
 		for (int i = 0; i < memo.getElementCount(); i++) {
 			int x = random.nextInt(Engine.getIWindowGame().getWindowWidth());
 			int y = random.nextInt(Engine.getIWindowGame().getWindowHeight());
-			
+
 			memo.getByElement(i).update();
 			memo.getByElement(i).setPxy(x, y);
 		}
@@ -63,6 +64,7 @@ public class SceneDefault implements IScene {
 		// TODO Auto-generated method stub
 
 	}
+
 	@Override
 	public boolean startScene() {
 		memo = new MemoryImpl(30);
@@ -73,8 +75,9 @@ public class SceneDefault implements IScene {
 			ElementModel e = new ElementModel(x, y, 10, 11, "" + i);
 
 			memo.registerElement(e);
+			e.loadElement();
 		}
-		
+
 		return true;
 	}
 
@@ -159,6 +162,26 @@ public class SceneDefault implements IScene {
 	public void reflashElementPosition(ElementMovableModel e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Color getBgColor() {
+		return Color.BLACK;
+	}
+
+	@Override
+	public void keyEvent(char keyChar, int keyCode) {
+		for (int i = 0; i < memo.getElementCount(); i++) {
+			if (memo.getByElement(i).getDefaultColor() == Color.BLUE) {
+				memo.getByElement(i).setDefaultColor(Color.GREEN);
+			} else {
+				memo.getByElement(i).setDefaultColor(Color.BLUE);
+			}
+		}
+	}
+
+	@Override
+	public void resizeWindow() {
 	}
 
 }

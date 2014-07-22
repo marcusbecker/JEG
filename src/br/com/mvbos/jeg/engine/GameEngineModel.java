@@ -28,7 +28,7 @@ public class GameEngineModel {
 			
 			@Override
 			public void run() {
-				Engine.log("enginit:");
+				Engine.log("enginit");
 
 				try {
 					long maxTime = 0;
@@ -53,13 +53,13 @@ public class GameEngineModel {
 								nextUpdate = getMillis() + ups;
 							}
 
-							long res = getMillis() - beforeTime;
+							beforeTime = getMillis() - beforeTime;//res
 
-							if (res <= fps) {
-								nextDraw = getMillis() + (fps - res);
+							if (beforeTime <= fps) {
+								nextDraw = getMillis() + (fps - beforeTime);
 							} else {
-								skipDraw += res - fps;
-								maxTime = res;
+								skipDraw += beforeTime - fps;
+								maxTime = beforeTime;
 								Engine.log("Time to process: " + maxTime);
 
 								nextDraw = getMillis() + fps;
