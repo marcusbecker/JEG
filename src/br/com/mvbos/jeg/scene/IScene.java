@@ -42,6 +42,8 @@ public interface IScene {
 	public void mouseMove(ElementModel e, Click m);
 	
 	public void keyEvent(char keyChar, int keyCode);
+	
+	public void keyRelease(char keyChar, int keyCode);
 
 	public void setTitle(String title);
 
@@ -68,5 +70,6 @@ public interface IScene {
 	
 	
 	public void resizeWindow();
+
 
 }

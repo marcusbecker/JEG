@@ -181,6 +181,14 @@ public class SceneDefault implements IScene {
 	}
 
 	@Override
+	public void keyRelease(char keyChar, int keyCode) {
+		for (int i = 0; i < memo.getElementCount(); i++) {
+			memo.getByElement(i).setDefaultColor(Color.YELLOW);
+
+		}
+	}
+
+	@Override
 	public void resizeWindow() {
 	}
 
