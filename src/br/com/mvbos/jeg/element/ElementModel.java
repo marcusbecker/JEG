@@ -112,6 +112,9 @@ public class ElementModel {
 	}
 
 	public void drawMe(Graphics2D g2d) {
+		if (!isVisible()) {
+			return;
+		}
 
 		if (getImage() != null) {
 			g2d.drawImage(getImage().getImage(), getPx(), getPy(), null);
