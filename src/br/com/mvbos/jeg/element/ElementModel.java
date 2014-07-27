@@ -16,8 +16,8 @@ public class ElementModel {
 
 	public static final String EMPTY = "";
 	private int id;
-	private int pX;
-	private int pY;
+	private float pX;
+	private float pY;
 	private int width;
 	private int height;
 	private String name = EMPTY;
@@ -41,8 +41,7 @@ public class ElementModel {
 		this.name = name;
 	}
 
-	public ElementModel(int positionX, int positionY, int width,
-			int height, String name) {
+	public ElementModel(int positionX, int positionY, int width, int height, String name) {
 		this.pX = positionX;
 		this.pY = positionY;
 		this.width = width;
@@ -83,7 +82,7 @@ public class ElementModel {
 	}
 
 	public int getPx() {
-		return pX;
+		return (int) pX;
 	}
 
 	public void setPx(int positionX) {
@@ -95,14 +94,14 @@ public class ElementModel {
 	}
 
 	public int getPy() {
-		return pY;
+		return (int) pY;
 	}
 
-	public void setPy(int positionY) {
+	public void setPy(float positionY) {
 		this.pY = positionY;
 	}
 
-	public void incPy(int positionY) {
+	public void incPy(float positionY) {
 		this.pY += positionY;
 	}
 
@@ -118,17 +117,27 @@ public class ElementModel {
 
 		if (getImage() != null) {
 			g2d.drawImage(getImage().getImage(), getPx(), getPy(), null);
-			
+
 		} else {
 			if (Engine.isPaused()) {
 				g2d.setColor(Color.RED);
-				
+
 			} else {
 				g2d.setColor(getDefaultColor());
 			}
 
 			g2d.drawRect(getPx(), getPy(), getWidth(), getHeight());
 
+		}
+	}
+
+	public void drawBorders(Graphics2D g2d) {
+		g2d.setColor(Color.RED);
+		g2d.drawRect(getPx(), getPy(), getWidth(), getHeight());
+
+		if (getImage() != null) {
+			g2d.setColor(Color.GREEN);
+			g2d.drawRect(getPx(), getPy(), getImage().getIconWidth(), getImage().getIconHeight());
 		}
 	}
 
@@ -180,11 +189,11 @@ public class ElementModel {
 	public void update() {
 	}
 
-	public float getAllWidth() {
+	public int getAllWidth() {
 		return getPx() + getWidth();
 	}
 
-	public float getAllHeight() {
+	public int getAllHeight() {
 		return getPy() + getHeight();
 	}
 
@@ -202,9 +211,8 @@ public class ElementModel {
 
 	@Override
 	public String toString() {
-		return "ElementModel{" + "positionX=" + pX + ", positionY=" + pY
-				+ ", width=" + width + ", height=" + height + ", name=" + name
-				+ '}';
+		return "ElementModel{" + "positionX=" + pX + ", positionY=" + pY + ", width=" + width + ", height=" + height
+				+ ", name=" + name + '}';
 	}
 
 	@Override
@@ -219,8 +227,7 @@ public class ElementModel {
 		if (this.id != other.id) {
 			return false;
 		}
-		if ((this.name == null) ? (other.name != null) : !this.name
-				.equals(other.name)) {
+		if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
 			return false;
 		}
 		return true;
