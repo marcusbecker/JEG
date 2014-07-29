@@ -20,15 +20,18 @@ public class GameEngineModel {
 		this.wg = wgg;
 
 		change(framePerSeconds, updatePerSeconds);
-		
+
 		gameThread = new Thread() {
 
 			long nextDraw = 0;
 			long nextUpdate = 0;
-			
+
 			@Override
 			public void run() {
 				Engine.log("enginit");
+
+				//final long init = getMillis();						Chrono.timePlay = getMillis() - init;
+				Chrono.startCountTimePlay(getMillis());
 
 				try {
 					long maxTime = 0;
@@ -39,21 +42,22 @@ public class GameEngineModel {
 							wg.engineNotification(id);
 
 							long beforeTime = getMillis();
-							
+
 							if (skipDraw >= fps) {
 								Engine.log("Draw skiped: " + skipDraw);
 								skipDraw -= fps;
 
 							} else {
 								wg.drawGame();
-							}							
+							}
 
-							if(nextUpdate <= getMillis()){
+							if (nextUpdate <= getMillis()) {
 								wg.updateGame();
 								nextUpdate = getMillis() + ups;
 							}
 
-							beforeTime = getMillis() - beforeTime;//res
+							beforeTime = getMillis() - beforeTime;// res
+							Chrono.timePass = beforeTime;
 
 							if (beforeTime <= fps) {
 								nextDraw = getMillis() + (fps - beforeTime);
@@ -84,12 +88,12 @@ public class GameEngineModel {
 	}
 
 	public void change(int framePerSeconds, int updatePerSeconds) {
-		//Engine.log("FPS: ", framePerSeconds);
-		//Engine.log("UPS: ", updatePerSeconds);
-		
+		// Engine.log("FPS: ", framePerSeconds);
+		// Engine.log("UPS: ", updatePerSeconds);
+
 		this.fps = framePerSeconds;
 		this.ups = updatePerSeconds;
-		
+
 	}
 
 	public boolean start() {
@@ -109,8 +113,9 @@ public class GameEngineModel {
 	}
 
 	public boolean stop() {
-		//gameThread.cancel(true);
+		// gameThread.cancel(true);
 		Engine.gameLoop = false;
 		return true;
 	}
+
 }

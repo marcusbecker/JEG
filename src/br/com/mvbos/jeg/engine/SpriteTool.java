@@ -3,16 +3,21 @@ package br.com.mvbos.jeg.engine;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 public class SpriteTool {
+
+	public static final int SORT = -1;
 
 	private static SpriteTool s;
 	private ImageIcon image;
 	private int lines;
 	private int coluns;
 	private boolean invert;
+
+	private static final Random r = new Random();
 
 	public static SpriteTool s(ImageIcon image) {
 		if (s == null) {
@@ -38,6 +43,15 @@ public class SpriteTool {
 	}
 
 	public SpriteTool draw(Graphics2D g2d, int pX, int pY, int mX, int mY) {
+
+		if (mX == SORT) {
+			mX = r.nextInt(lines);
+		}
+
+		if (mY == SORT) {
+			mY = r.nextInt(coluns);
+		}
+
 		int r = getImage().getIconWidth() / lines;
 		int l = getImage().getIconHeight() / coluns;
 
@@ -75,5 +89,4 @@ public class SpriteTool {
 		return this;
 
 	}
-
 }
