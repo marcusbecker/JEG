@@ -85,11 +85,11 @@ public class ElementModel {
 		return (int) pX;
 	}
 
-	public void setPx(int positionX) {
+	public void setPx(float positionX) {
 		this.pX = positionX;
 	}
 
-	public void incPx(int positionX) {
+	public void incPx(float positionX) {
 		this.pX += positionX;
 	}
 
@@ -105,7 +105,7 @@ public class ElementModel {
 		this.pY += positionY;
 	}
 
-	public void setPxy(int x, int y) {
+	public void setPxy(float x, float y) {
 		this.pX = x;
 		this.pY = y;
 	}
