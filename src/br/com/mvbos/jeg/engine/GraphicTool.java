@@ -30,11 +30,11 @@ public class GraphicTool {
 	 * @return null se nao houve colisao
 	 */
 	public ElementModel collide(ElementModel e, ElementModel em) {
-		if (e == null || em == null || e == em) {
+		if (e == null || em == null) {
 			return e;
 		}
 		
-		if (!e.isEnabled() || !em.isEnabled()) {
+		if ( e == em || !e.isEnabled() || !em.isEnabled()) {
 			return null;
 		}
 		

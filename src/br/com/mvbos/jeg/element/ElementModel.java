@@ -41,7 +41,8 @@ public class ElementModel {
 		this.name = name;
 	}
 
-	public ElementModel(int positionX, int positionY, int width, int height, String name) {
+	public ElementModel(int positionX, int positionY, int width, int height,
+			String name) {
 		this.pX = positionX;
 		this.pY = positionY;
 		this.width = width;
@@ -137,7 +138,8 @@ public class ElementModel {
 
 		if (getImage() != null) {
 			g2d.setColor(Color.GREEN);
-			g2d.drawRect(getPx(), getPy(), getImage().getIconWidth(), getImage().getIconHeight());
+			g2d.drawRect(getPx(), getPy(), getImage().getIconWidth(),
+					getImage().getIconHeight());
 		}
 	}
 
@@ -211,8 +213,9 @@ public class ElementModel {
 
 	@Override
 	public String toString() {
-		return "ElementModel{" + "positionX=" + pX + ", positionY=" + pY + ", width=" + width + ", height=" + height
-				+ ", name=" + name + '}';
+		return "ElementModel{" + "positionX=" + pX + ", positionY=" + pY
+				+ ", width=" + width + ", height=" + height + ", name=" + name
+				+ '}';
 	}
 
 	@Override
@@ -227,7 +230,8 @@ public class ElementModel {
 		if (this.id != other.id) {
 			return false;
 		}
-		if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+		if ((this.name == null) ? (other.name != null) : !this.name
+				.equals(other.name)) {
 			return false;
 		}
 		return true;
@@ -317,6 +321,14 @@ public class ElementModel {
 	public void setImageAndSize(ImageIcon image) {
 		setImage(image);
 		copyImgeSize();
+	}
+
+	public int getHalfWidth() {
+		return getWidth() / 2;
+	}
+
+	public int getHalfHeight() {
+		return getHeight() / 2;
 	}
 
 }
