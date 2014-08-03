@@ -111,34 +111,34 @@ public class ElementModel {
 		this.pY = y;
 	}
 
-	public void drawMe(Graphics2D g2d) {
+	public void drawMe(Graphics2D g) {
 		if (!isVisible()) {
 			return;
 		}
 
 		if (getImage() != null) {
-			g2d.drawImage(getImage().getImage(), getPx(), getPy(), null);
+			g.drawImage(getImage().getImage(), getPx(), getPy(), null);
 
 		} else {
 			if (Engine.isPaused()) {
-				g2d.setColor(Color.RED);
+				g.setColor(Color.RED);
 
 			} else {
-				g2d.setColor(getDefaultColor());
+				g.setColor(getDefaultColor());
 			}
 
-			g2d.drawRect(getPx(), getPy(), getWidth(), getHeight());
+			g.drawRect(getPx(), getPy(), getWidth(), getHeight());
 
 		}
 	}
 
-	public void drawBorders(Graphics2D g2d) {
-		g2d.setColor(Color.RED);
-		g2d.drawRect(getPx(), getPy(), getWidth(), getHeight());
+	public void drawBorders(Graphics2D g) {
+		g.setColor(Color.RED);
+		g.drawRect(getPx(), getPy(), getWidth(), getHeight());
 
 		if (getImage() != null) {
-			g2d.setColor(Color.GREEN);
-			g2d.drawRect(getPx(), getPy(), getImage().getIconWidth(),
+			g.setColor(Color.GREEN);
+			g.drawRect(getPx(), getPy(), getImage().getIconWidth(),
 					getImage().getIconHeight());
 		}
 	}
