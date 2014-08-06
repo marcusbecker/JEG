@@ -1,5 +1,7 @@
 package br.com.mvbos.jeg.window;
 
+import java.awt.Graphics2D;
+
 import br.com.mvbos.jeg.element.ElementModel;
 import br.com.mvbos.jeg.engine.Engine;
 
@@ -29,7 +31,7 @@ public class Camera {
 	public Camera config(int w, int h) {
 		this.w = w;
 		this.h = h;
-		
+
 		return this;
 	}
 
@@ -122,6 +124,23 @@ public class Camera {
 		} else if (cpy > (h - Engine.getIWindowGame().getCanvasHeight())) {
 			cpy = h - Engine.getIWindowGame().getCanvasHeight();
 		}
+	}
+
+	/**
+	 * Draw element on cam with fix x,y position
+	 * 
+	 * @param g
+	 * @param el
+	 */
+	public void close(Graphics2D g, ElementModel el) {
+		if (el.getImage() != null) {
+			g.drawImage(el.getImage().getImage(), el.getPx(), el.getPy(), null);
+
+		} else {
+			g.setColor(el.getDefaultColor());
+			g.drawRect(fx(el.getPx()), fy(el.getPy()), el.getWidth(), el.getHeight());
+		}
+
 	}
 
 }
