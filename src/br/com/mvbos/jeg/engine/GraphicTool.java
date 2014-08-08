@@ -2,6 +2,7 @@ package br.com.mvbos.jeg.engine;
 
 import br.com.mvbos.jeg.element.ElementModel;
 import br.com.mvbos.jeg.scene.Click;
+import br.com.mvbos.jeg.window.IMemory;
 
 public class GraphicTool {
 
@@ -16,10 +17,8 @@ public class GraphicTool {
 	}
 
 	public void centerWindow(ElementModel el) {
-		el.setPx(Engine.getIWindowGame().getWindowWidth() / 2 - el.getWidth()
-				/ 2);
-		el.setPy(Engine.getIWindowGame().getWindowHeight() / 2 - el.getHeight()
-				/ 2);
+		el.setPx(Engine.getIWindowGame().getWindowWidth() / 2 - el.getWidth() / 2);
+		el.setPy(Engine.getIWindowGame().getWindowHeight() / 2 - el.getHeight() / 2);
 	}
 
 	/**
@@ -33,11 +32,11 @@ public class GraphicTool {
 		if (e == null || em == null) {
 			return e;
 		}
-		
-		if ( e == em || !e.isEnabled() || !em.isEnabled()) {
+
+		if (e == em || !e.isEnabled() || !em.isEnabled()) {
 			return null;
 		}
-		
+
 		if (intersecElement(e, em)) {
 			return em;
 		}
@@ -46,8 +45,7 @@ public class GraphicTool {
 	}
 
 	// TODO efetuar testes
-	public boolean intersecElement(float ax, float ay, float bx, float by,
-			int aw, int ah, int bw, int bh) {
+	public boolean intersecElement(float ax, float ay, float bx, float by, int aw, int ah, int bw, int bh) {
 		if (ax + aw >= bx && ax <= bx + bw && ay + ah >= by && ay <= by + bh) {
 			return true;
 		}
@@ -69,8 +67,7 @@ public class GraphicTool {
 		final int phA = (int) eA.getHitY() + eA.getHitHeight();
 		final int phB = (int) eB.getHitY() + eB.getHitHeight();
 
-		if (pwA >= eB.getHitX() && eA.getHitX() <= pwB && phA >= eB.getHitY()
-				&& eA.getHitY() <= phB) {
+		if (pwA >= eB.getHitX() && eA.getHitX() <= pwB && phA >= eB.getHitY() && eA.getHitY() <= phB) {
 			return true;
 		}
 
@@ -87,8 +84,7 @@ public class GraphicTool {
 	 */
 
 	public boolean intersec(int x, int y, ElementModel e) {
-		return intersecElement(x, y, e.getHitX(), e.getHitY(), 1, 1,
-				e.getHitWidth(), e.getHitHeight());
+		return intersecElement(x, y, e.getHitX(), e.getHitY(), 1, 1, e.getHitWidth(), e.getHitHeight());
 		/*
 		 * if ((elementAX >= e.getHitX() && elementAX <= (e.getHitX() +
 		 * e.getHitWidth())) && (elementAY >= e.getHitY() && elementAY <=
@@ -108,9 +104,49 @@ public class GraphicTool {
 	 */
 
 	public boolean intersec(Click c, ElementModel e) {
-		return intersecElement(c.getPx(), c.getPy(), e.getHitX(), e.getHitY(),
-				1, 1, e.getHitWidth(), e.getHitHeight());
+		return intersecElement(c.getPx(), c.getPy(), e.getHitX(), e.getHitY(), 1, 1, e.getHitWidth(), e.getHitHeight());
 
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @param memo
+	 * @return
+	 */
+	public ElementModel collide(ElementModel e, IMemory memo) {
+		for (int i = memo.getElementCount() - 1; i >= 0; i--) {
+			ElementModel el = memo.getByElement(i);
+
+			if (collide(e, el) != null) {
+				return el;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param e
+	 * @param memo
+	 * @param c
+	 * @return
+	 */
+	public <T extends ElementModel> T collide(ElementModel e, IMemory memo, Class<T> c) {
+		if (c == null) {
+			throw new IllegalArgumentException("The class object is required.");
+		}
+
+		for (int i = memo.getElementCount() - 1; i >= 0; i--) {
+			ElementModel el = memo.getByElement(i);
+
+			if (el.getClass().equals(c) && collide(e, el) != null) {
+				return (T) el;
+			}
+		}
+
+		return null;
 	}
 
 }
