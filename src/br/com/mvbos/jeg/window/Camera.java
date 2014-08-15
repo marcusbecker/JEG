@@ -134,7 +134,7 @@ public class Camera {
 	 */
 	public void close(Graphics2D g, ElementModel el) {
 		if (el.getImage() != null) {
-			g.drawImage(el.getImage().getImage(), el.getPx(), el.getPy(), null);
+			g.drawImage(el.getImage().getImage(), fx(el.getPx()), el.getPy(), null);
 
 		} else {
 			g.setColor(el.getDefaultColor());
