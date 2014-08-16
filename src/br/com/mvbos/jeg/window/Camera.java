@@ -41,7 +41,7 @@ public class Camera {
 	 * @param px2
 	 * @return
 	 */
-	public int fx(int px) {
+	public int fx(float px) {
 		return (int) (px - this.cpx);
 	}
 
@@ -51,7 +51,7 @@ public class Camera {
 	 * @param py
 	 * @return
 	 */
-	public int fy(int py) {
+	public int fy(float py) {
 		return (int) (py - this.cpy);
 	}
 

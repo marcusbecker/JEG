@@ -72,7 +72,7 @@ public class GameEngineModel {
                             if (beforeTime <= fps) {
                                 nextDraw = getMillis() + (fps - beforeTime);
                             } else {
-                                skipDraw += beforeTime - fps;
+                                //skipDraw += beforeTime - fps;
                                 maxTime = beforeTime;
                                 Engine.log("Time to process: " + maxTime);
 
