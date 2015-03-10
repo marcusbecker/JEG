@@ -56,17 +56,17 @@ public class GameEngineModel {
 
 							long beforeTime = getMillis();
 
+							if (nextUpdate <= getMillis()) {
+								wg.updateGame();
+								nextUpdate = getMillis() + ups;
+							}
+
 							if (skipDraw >= fps) {
 								Engine.log("Draw skiped: " + skipDraw);
 								skipDraw -= fps;
 
 							} else {
 								wg.drawGame();
-							}
-
-							if (nextUpdate <= getMillis()) {
-								wg.updateGame();
-								nextUpdate = getMillis() + ups;
 							}
 
 							beforeTime = getMillis() - beforeTime;// res
@@ -82,7 +82,8 @@ public class GameEngineModel {
 								nextDraw = getMillis() + fps;
 
 								if (autoAdjust) {
-									fps += 10;
+									fps += 2;
+									Engine.log("Adjust FPS to: " + fps);
 								}
 							}
 						}

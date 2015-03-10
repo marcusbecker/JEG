@@ -12,11 +12,9 @@ public class SpriteTool {
 
 	private static SpriteTool s;
 	private ImageIcon image;
+	private int columns;
 	private int lines;
-	private int coluns;
 	private boolean invert;
-
-
 
 	public static SpriteTool s(ImageIcon image) {
 		if (s == null) {
@@ -35,27 +33,27 @@ public class SpriteTool {
 		this.image = image;
 	}
 
-	public SpriteTool matriz(int lines, int coluns) {
+	public SpriteTool matriz(int columns, int lines) {
+		this.columns = columns;
 		this.lines = lines;
-		this.coluns = coluns;
 		return this;
 	}
 
 	public SpriteTool draw(Graphics2D g2d, int pX, int pY, int mX, int mY) {
 
 		if (mX == SORT) {
-			mX = MathTool.r.nextInt(lines);
+			mX = MathTool.r.nextInt(columns);
 		}
 
 		if (mY == SORT) {
-			mY = MathTool.r.nextInt(coluns);
+			mY = MathTool.r.nextInt(lines);
 		}
 
-		int r = getImage().getIconWidth() / lines;
-		int l = getImage().getIconHeight() / coluns;
+		int cs = getImage().getIconWidth() / columns; // Column start
+		int ls = getImage().getIconHeight() / lines; // Line start
 
-		int n = r * mX;
-		int m = l * mY;
+		int ch = cs * mX; // Column height
+		int lw = ls * mY; // Line width
 
 		AffineTransform old = g2d.getTransform();
 
@@ -67,10 +65,10 @@ public class SpriteTool {
 
 			pX = (-pX) + getImage().getIconWidth();
 
-			g2d.drawImage(getImage().getImage(), pX - r, pY, pX, pY + l, n, m, n + r, m + l, getObserver());
+			g2d.drawImage(getImage().getImage(), pX - cs, pY, pX, pY + ls, ch, lw, ch + cs, lw + ls, getObserver());
 
 		} else {
-			g2d.drawImage(getImage().getImage(), pX, pY, pX + r, pY + l, n, m, n + r, m + l, getObserver());
+			g2d.drawImage(getImage().getImage(), pX, pY, pX + cs, pY + ls, ch, lw, ch + cs, lw + ls, getObserver());
 		}
 
 		g2d.setTransform(old);

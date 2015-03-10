@@ -30,7 +30,7 @@ public class GraphicTool {
 	 */
 	public ElementModel collide(ElementModel e, ElementModel em) {
 		if (e == null || em == null) {
-			return e;
+			return null;
 		}
 
 		if (e == em || !e.isEnabled() || !em.isEnabled()) {
@@ -42,6 +42,17 @@ public class GraphicTool {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Verifica se dois elementos com enabled = true colidem
+	 * 
+	 * @param e
+	 * @param em
+	 * @return false se nao houve colisao
+	 */
+	public boolean bcollide(ElementModel e, ElementModel em) {
+		return collide(e, em) != null;
 	}
 
 	// TODO efetuar testes
