@@ -29,7 +29,8 @@ $RECYCLE.BIN/
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -39,3 +40,8 @@ Icon
 .Trashes
 
 *.prefs
+/JEG/nbproject/private/
+/nbproject/private/
+/build/
+/dist/
+nbproject/
