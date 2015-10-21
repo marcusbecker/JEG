@@ -55,9 +55,11 @@ public class SpriteTool {
 		int ch = cs * mX; // Column height
 		int lw = ls * mY; // Line width
 
-		AffineTransform old = g2d.getTransform();
 
 		if (invert) {
+			AffineTransform old = g2d.getTransform();
+			
+			//TODO verify if need to move this to local variable
 			AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 			tx.translate(-getImage().getIconWidth(), 0);
 
@@ -67,11 +69,12 @@ public class SpriteTool {
 
 			g2d.drawImage(getImage().getImage(), pX - cs, pY, pX, pY + ls, ch, lw, ch + cs, lw + ls, getObserver());
 
+			g2d.setTransform(old);
+			
 		} else {
 			g2d.drawImage(getImage().getImage(), pX, pY, pX + cs, pY + ls, ch, lw, ch + cs, lw + ls, getObserver());
 		}
 
-		g2d.setTransform(old);
 
 		return this;
 	}
