@@ -137,7 +137,7 @@ public class Camera {
 			g.drawImage(el.getImage().getImage(), fx(el.getPx()), el.getPy(), null);
 
 		} else {
-			g.setColor(el.getDefaultColor());
+			g.setColor(el.getColor());
 			g.drawRect(fx(el.getPx()), fy(el.getPy()), el.getWidth(), el.getHeight());
 		}
 

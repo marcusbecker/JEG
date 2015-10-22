@@ -15,18 +15,17 @@ import br.com.mvbos.jeg.engine.Engine;
 public class ElementModel {
 
     public static final String EMPTY = "";
-    private int id;
-    private float pX;
-    private float pY;
-    private int width;
-    private int height;
-    private String name = EMPTY;
-    private boolean visible = true;
-    private boolean enabled = true;
-    private boolean destroyed = false;
-    private ImageIcon image;
-    private String imageURL;
-    private Color defaultColor = Color.BLUE;
+    protected int id;
+    protected float pX;
+    protected float pY;
+    protected int width;
+    protected int height;
+    protected String name = EMPTY;
+    protected boolean visible = true;
+    protected boolean enabled = true;
+    protected boolean destroyed = false;
+    protected ImageIcon image;
+    protected Color color = Color.BLUE;
 
     public void loadElement() {
         Engine.log("Nothing to load.");
@@ -124,7 +123,7 @@ public class ElementModel {
                 g.setColor(Color.RED);
 
             } else {
-                g.setColor(getDefaultColor());
+                g.setColor(getColor());
             }
 
             g.drawRect(getPx(), getPy(), getWidth(), getHeight());
@@ -143,20 +142,12 @@ public class ElementModel {
         }
     }
 
-    public Color getDefaultColor() {
-        return defaultColor;
-    }
-
-    public void setDefaultColor(Color defaultColor) {
-        this.defaultColor = defaultColor;
-    }
-
     public Color getColor() {
-        return defaultColor;
+        return color;
     }
 
     public void setColor(Color color) {
-        this.defaultColor = color;
+        this.color = color;
     }
 
     public boolean isVisible() {
@@ -186,14 +177,10 @@ public class ElementModel {
 
     public void setImage(ImageIcon image) {
         this.image = image;
-    }
 
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+        if (isValidImage()) {
+            setSize(image.getIconWidth(), image.getIconHeight());
+        }
     }
 
     public void update() {

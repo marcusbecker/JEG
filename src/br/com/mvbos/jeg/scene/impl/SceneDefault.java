@@ -172,10 +172,10 @@ public class SceneDefault implements IScene {
 	@Override
 	public void keyEvent(char keyChar, int keyCode) {
 		for (int i = 0; i < memo.getElementCount(); i++) {
-			if (memo.getByElement(i).getDefaultColor() == Color.BLUE) {
-				memo.getByElement(i).setDefaultColor(Color.GREEN);
+			if (memo.getByElement(i).getColor() == Color.BLUE) {
+				memo.getByElement(i).setColor(Color.GREEN);
 			} else {
-				memo.getByElement(i).setDefaultColor(Color.BLUE);
+				memo.getByElement(i).setColor(Color.BLUE);
 			}
 		}
 	}
@@ -183,7 +183,7 @@ public class SceneDefault implements IScene {
 	@Override
 	public void keyRelease(char keyChar, int keyCode) {
 		for (int i = 0; i < memo.getElementCount(); i++) {
-			memo.getByElement(i).setDefaultColor(Color.YELLOW);
+			memo.getByElement(i).setColor(Color.YELLOW);
 
 		}
 	}

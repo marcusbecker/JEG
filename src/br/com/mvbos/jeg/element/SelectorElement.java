@@ -15,7 +15,7 @@ public class SelectorElement extends ElementModel {
 
     public SelectorElement(Color color, String name) {
         this.setName(name);
-        this.setDefaultColor(color);
+        this.setColor(color);
 
         this.setEnabled(false);
     }
@@ -27,7 +27,7 @@ public class SelectorElement extends ElementModel {
             return;
         }
 
-        g.setColor(getDefaultColor());
+        g.setColor(getColor());
 
         boolean revertX = getPx() < getWidth();
         boolean revertY = getPy() < getHeight();
