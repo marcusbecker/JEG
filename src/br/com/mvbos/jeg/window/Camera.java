@@ -91,6 +91,11 @@ public class Camera {
 
     public void rollX(float x) {
         cpx += x;
+
+        if (allowOffset) {
+            return;
+        }
+
         if (cpx < 0) {
             cpx = 0;
         } else if (cpx > w) {
@@ -100,6 +105,10 @@ public class Camera {
 
     public void rollY(float y) {
         cpy += y;
+
+        if (allowOffset) {
+            return;
+        }
 
         if (cpy < 0) {
             cpy = 0;
