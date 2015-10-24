@@ -40,7 +40,7 @@ public class ElementModel {
         this.name = name;
     }
 
-    public ElementModel(int positionX, int positionY, int width, int height,
+    public ElementModel(float positionX, float positionY, int width, int height,
             String name) {
         this.pX = positionX;
         this.pY = positionY;
