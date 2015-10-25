@@ -45,3 +45,5 @@ Icon
 /build/
 /dist/
 nbproject/
+manifest.mf
+build.xml

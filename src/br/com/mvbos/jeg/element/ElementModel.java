@@ -6,13 +6,14 @@ import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
 import br.com.mvbos.jeg.engine.Engine;
+import java.io.Serializable;
 
 /**
  *
  * @author Marcus Becker
  *
  */
-public class ElementModel {
+public class ElementModel implements Serializable {
 
     public static final String EMPTY = "";
     protected int id;
