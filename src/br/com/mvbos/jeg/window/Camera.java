@@ -12,13 +12,23 @@ import java.awt.geom.AffineTransform;
  */
 public class Camera {
 
+    public static Camera createNew() {
+        return new Camera();
+    }
+
     private float cpx;
     private float cpy;
 
     private int w = 4000;
     private int h = 3970;
 
-    private boolean allowOffset = true;
+    private short scrw = 1024;
+    private short scrh = 768;
+
+    private short xOffset;
+    private short yOffset;
+
+    private boolean allowOffset;
 
     private static Camera c;
 
@@ -29,10 +39,30 @@ public class Camera {
 
         return c;
     }
+    private boolean active = true;
 
-    public Camera config(int w, int h) {
-        this.w = w;
-        this.h = h;
+    /**
+     * The sceneWidth and sceneHeight are the size of the scene and must be
+     * larger than the size of screen (screenWidth and screeHeight), to make
+     * sense to use the camera.
+     *
+     * @param sceneWidth
+     * @param sceneHeight
+     * @param screenWidth
+     * @param screeHeight
+     * @return
+     */
+    public Camera config(int sceneWidth, int sceneHeight, int screenWidth, int screeHeight) {
+
+        if (sceneWidth + sceneHeight < screenWidth + screeHeight) {
+            throw new IllegalArgumentException("The screen size is more larger that the scene.");
+        }
+
+        this.w = sceneWidth;
+        this.h = sceneHeight;
+
+        this.scrw = (short) screenWidth;
+        this.scrh = (short) screeHeight;
 
         return this;
     }
@@ -79,6 +109,14 @@ public class Camera {
 
     public int getPy() {
         return (int) cpy;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public boolean isAllowOffset() {
@@ -129,27 +167,33 @@ public class Camera {
             return;
         }
 
-        if (cpx < 0) {
-            cpx = 0;
-        } else if (cpx > w) {
-            cpx = w;
+        if (cpx < -xOffset) {
+            cpx = -xOffset;
+
+        } else if (cpx + xOffset > (w - scrw)) {
+            cpx = w - scrw;
         }
 
-        if (cpy < 0) {
-            cpy = 0;
-        } else if (cpy > h) {
-            cpy = h;
+        if (cpy < -yOffset) {
+            cpy = -yOffset;
+        } else if (cpy + yOffset > (h - scrh)) {
+            cpy = h - scrh;
         }
 
     }
 
     public void draw(Graphics2D g, ElementModel el) {
-        AffineTransform t = g.getTransform();
+        if (active) {
+            AffineTransform t = g.getTransform();
 
-        g.translate(-cpx, -cpy);
-        el.drawMe(g);
+            g.translate(-cpx, -cpy);
+            el.drawMe(g);
 
-        g.setTransform(t);
+            g.setTransform(t);
+        } else {
+            el.drawMe(g);
+        }
+
     }
 
     @Override
@@ -182,7 +226,7 @@ public class Camera {
      * @param g
      * @param el
      */
-    public void close(Graphics2D g, ElementModel el) {
+    public void closer(Graphics2D g, ElementModel el) {
         if (el.getImage() != null) {
             g.drawImage(el.getImage().getImage(), fx(el.getPx()), el.getPy(), null);
 
@@ -191,5 +235,10 @@ public class Camera {
             g.drawRect(fx(el.getPx()), fy(el.getPy()), el.getWidth(), el.getHeight());
         }
 
+    }
+
+    public void offSet(int x, int y) {
+        xOffset = (short) x;
+        yOffset = (short) y;
     }
 }
