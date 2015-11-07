@@ -28,6 +28,9 @@ public class ElementModel implements Serializable {
     protected ImageIcon image;
     protected Color color = Color.BLUE;
 
+    protected byte dirX;
+    protected byte dirY;
+
     public void loadElement() {
         Engine.log("Nothing to load.");
     }
@@ -86,6 +89,14 @@ public class ElementModel implements Serializable {
         return (int) pX;
     }
 
+    public float getPpx() {
+        return pX;
+    }
+
+    public float getPpy() {
+        return pY;
+    }
+
     public void setPx(float positionX) {
         this.pX = positionX;
     }
@@ -111,6 +122,40 @@ public class ElementModel implements Serializable {
         this.pY = y;
     }
 
+    public int getDirX() {
+        return dirX;
+    }
+
+    public void setDirX(int dir) {
+        if (dir < 0) {
+            dirX = -1;
+        } else if (dir > 0) {
+            dirX = 1;
+        } else {
+            dirX = 0;
+        }
+
+    }
+
+    public void setDir(int x, int y) {
+        setDirX(x);
+        setDirY(y);
+    }
+
+    public int getDirY() {
+        return dirY;
+    }
+
+    public void setDirY(int dir) {
+        if (dir < 0) {
+            dirY = -1;
+        } else if (dir > 0) {
+            dirY = 1;
+        } else {
+            dirY = 0;
+        }
+    }
+
     public void drawMe(Graphics2D g) {
         if (!isVisible()) {
             return;
@@ -133,13 +178,14 @@ public class ElementModel implements Serializable {
     }
 
     public void drawBorders(Graphics2D g) {
-        g.setColor(Color.RED);
-        g.drawRect(getPx(), getPy(), getWidth(), getHeight());
-
         if (getImage() != null) {
             g.setColor(Color.GREEN);
-            g.drawRect(getPx(), getPy(), getImage().getIconWidth(),
-                    getImage().getIconHeight());
+            g.drawRect(getPx() - 5, getPy() - 5, getImage().getIconWidth() + 10,
+                    getImage().getIconHeight() + 10);
+
+        } else {
+            g.setColor(Color.RED);
+            g.drawRect(getPx() - 5, getPy() - 5, getWidth() + 10, getHeight() + 10);
         }
     }
 
@@ -187,6 +233,10 @@ public class ElementModel implements Serializable {
     public void update() {
     }
 
+    /**
+     * 
+     * @return px  + width
+     */
     public int getAllWidth() {
         return getPx() + getWidth();
     }

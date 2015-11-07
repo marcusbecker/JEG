@@ -12,10 +12,6 @@ import java.awt.geom.AffineTransform;
  */
 public class Camera {
 
-    public static Camera createNew() {
-        return new Camera();
-    }
-
     private float cpx;
     private float cpy;
 
@@ -30,6 +26,8 @@ public class Camera {
 
     private boolean allowOffset;
 
+    private boolean active = true;
+
     private static Camera c;
 
     public static Camera c() {
@@ -39,7 +37,10 @@ public class Camera {
 
         return c;
     }
-    private boolean active = true;
+
+    public static Camera createNew() {
+        return new Camera();
+    }
 
     /**
      * The sceneWidth and sceneHeight are the size of the scene and must be

@@ -5,191 +5,116 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import br.com.mvbos.jeg.element.ElementModel;
-import br.com.mvbos.jeg.element.ElementMovableModel;
-import br.com.mvbos.jeg.element.IButtonElement;
 import br.com.mvbos.jeg.engine.Engine;
-import br.com.mvbos.jeg.scene.Click;
 import br.com.mvbos.jeg.scene.IScene;
 import br.com.mvbos.jeg.window.IMemory;
 import br.com.mvbos.jeg.window.impl.MemoryImpl;
 
 public class SceneDefault implements IScene {
 
-	protected IMemory memo;
-	private Random random = new Random();
+    protected IMemory memo;
+    private final Random random = new Random();
 
-	@Override
-	public void update() {
-		if (memo == null) {
-			Engine.log("Update Error: Scene don't started.");
-			return;
-		}
+    @Override
+    public void updateScene() {
+        if (memo == null) {
+            Engine.log("Update Error: Scene don't started.");
+            return;
+        }
 
-		for (int i = 0; i < memo.getElementCount(); i++) {
-			int x = random.nextInt(Engine.getIWindowGame().getWindowWidth());
-			int y = random.nextInt(Engine.getIWindowGame().getWindowHeight());
+        for (int i = 0; i < memo.getElementCount(); i++) {
+            int x = random.nextInt(Engine.getIWindowGame().getWindowWidth());
+            int y = random.nextInt(Engine.getIWindowGame().getWindowHeight());
 
-			memo.getByElement(i).update();
-			memo.getByElement(i).setPxy(x, y);
-		}
+            memo.getByElement(i).update();
+            memo.getByElement(i).setPxy(x, y);
+        }
 
-	}
+    }
 
-	@Override
-	public void changeSceneEvent() {
-		// TODO Auto-generated method stub
+    @Override
+    public void changeSceneEvent() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void selectElement(ElementModel e) {
-		// TODO Auto-generated method stub
+    @Override
+    public void closeWindow() {
+        // TODO Auto-generated method stub
+    }
 
-	}
+    @Override
+    public boolean startScene() {
+        memo = new MemoryImpl(30);
 
-	@Override
-	public void focusElement(ElementModel e) {
-		// TODO Auto-generated method stub
+        for (int i = 0; i < memo.getCapacity(); i++) {
+            int x = random.nextInt(Engine.getIWindowGame().getWindowWidth());
+            int y = random.nextInt(Engine.getIWindowGame().getWindowHeight());
+            ElementModel e = new ElementModel(x, y, 10, 11, "" + i);
 
-	}
+            memo.registerElement(e);
+            e.loadElement();
+        }
 
-	@Override
-	public void releaseElement(ElementModel element, ElementModel anotherElement) {
-		// TODO Auto-generated method stub
+        return true;
+    }
 
-	}
+    @Override
+    public IMemory[] getElements() {
+        return new IMemory[]{memo};
+    }
 
-	@Override
-	public void closeWindow() {
-		// TODO Auto-generated method stub
+    @Override
+    public void drawScene(Graphics2D g2d) {
+        if (memo == null) {
+            Engine.log("Draw Error: Scene don't started.");
+            return;
+        }
 
-	}
+        for (int i = 0; i < memo.getElementCount(); i++) {
+            if (memo.getByElement(i).isVisible()) {
+                memo.getByElement(i).drawMe(g2d);
+            }
+        }
+    }
 
-	@Override
-	public boolean startScene() {
-		memo = new MemoryImpl(30);
+    public void keyEvent(char keyChar, int keyCode) {
+        for (int i = 0; i < memo.getElementCount(); i++) {
+            if (memo.getByElement(i).getColor() == Color.BLUE) {
+                memo.getByElement(i).setColor(Color.GREEN);
+            } else {
+                memo.getByElement(i).setColor(Color.BLUE);
+            }
+        }
+    }
 
-		for (int i = 0; i < memo.getCapacity(); i++) {
-			int x = random.nextInt(Engine.getIWindowGame().getWindowWidth());
-			int y = random.nextInt(Engine.getIWindowGame().getWindowHeight());
-			ElementModel e = new ElementModel(x, y, 10, 11, "" + i);
+    public void keyRelease(char keyChar, int keyCode) {
+        for (int i = 0; i < memo.getElementCount(); i++) {
+            memo.getByElement(i).setColor(Color.YELLOW);
 
-			memo.registerElement(e);
-			e.loadElement();
-		}
+        }
+    }
 
-		return true;
-	}
+    @Override
+    public void resizeWindow(int w, int h) {
+    }
 
-	@Override
-	public void startGame() {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void setElements(IMemory[] memory) {
+    }
 
-	@Override
-	public IMemory getElements() {
-		return memo;
-	}
+    @Override
+    public String getTitle() {
+        return "Default Scene";
+    }
 
-	@Override
-	public void clickElement(int clickCount) {
-		// TODO Auto-generated method stub
+    @Override
+    public void focusWindow() {
+    }
 
-	}
+    @Override
+    public void lostFocusWindow() {
 
-	@Override
-	public void clickElement(Click m) {
-		clickElement(0);
-	}
-
-	@Override
-	public void selectElement(ElementModel[] arr) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseMove(ElementModel e, Click m) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void setTitle(String title) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void releaseElement(ElementModel element) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void drawElements(Graphics2D g2d) {
-		if (memo == null) {
-			Engine.log("Draw Error: Scene don't started.");
-			return;
-		}
-
-		for (int i = 0; i < memo.getElementCount(); i++) {
-			if (memo.getByElement(i).isVisible()) {
-				memo.getByElement(i).drawMe(g2d);
-			}
-		}
-	}
-
-	@Override
-	public void clickButton(IButtonElement button) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void moveElement(ElementMovableModel selectedMovableElement) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void reflashElementPosition(ElementMovableModel e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Color getBgColor() {
-		return Color.BLACK;
-	}
-
-	@Override
-	public void keyEvent(char keyChar, int keyCode) {
-		for (int i = 0; i < memo.getElementCount(); i++) {
-			if (memo.getByElement(i).getColor() == Color.BLUE) {
-				memo.getByElement(i).setColor(Color.GREEN);
-			} else {
-				memo.getByElement(i).setColor(Color.BLUE);
-			}
-		}
-	}
-
-	@Override
-	public void keyRelease(char keyChar, int keyCode) {
-		for (int i = 0; i < memo.getElementCount(); i++) {
-			memo.getByElement(i).setColor(Color.YELLOW);
-
-		}
-	}
-
-	@Override
-	public void resizeWindow() {
-	}
+    }
 
 }

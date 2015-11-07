@@ -2,134 +2,146 @@ package br.com.mvbos.jeg.engine;
 
 /**
  * Control the ClickMap events
- * 
+ *
  * @author mbecker
- * 
+ *
  */
 public class JoyPad {
 
-	public boolean[] pressed = new boolean[KeysMap.values().length];
+    public boolean[] pressed = new boolean[KeysMap.values().length];
 
-	// cima, baixo, esq, dir, Q, E
-	private int[] keysCode = {};
-	private char[] keysChar = {};
+    // cima, baixo, esq, dir, Q, E
+    private int[] keysCode = {};
+    private char[] keysChar = {};
 
-	public JoyPad() {
+    public JoyPad() {
 
-	}
+    }
 
-	public JoyPad(int[] keysCode, char[] keysChar) {
-		this.keysChar = keysChar;
-		this.keysCode = keysCode;
-	}
+    public JoyPad(int[] keysCode, char[] keysChar) {
+        this.keysChar = keysChar;
+        this.keysCode = keysCode;
+    }
 
-	public boolean is(KeysMap k) {
-		return pressed[k.ordinal()];
-	}
+    public boolean is(KeysMap k) {
+        return pressed[k.ordinal()];
+    }
 
-	public void consume(KeysMap k) {
-		if (k == null)
-			return;
+    public void consume(KeysMap k) {
+        if (k == null) {
+            return;
+        }
 
-		pressed[k.ordinal()] = false;
+        pressed[k.ordinal()] = false;
 
-	}
+    }
 
-	public void press(KeysMap direction) {
+    public void press(KeysMap direction) {
 
-		if (direction == null)
-			return;
+        if (direction == null) {
+            return;
+        }
 
-		switch (direction) {
-		case UP:
-			pressed[KeysMap.UP.ordinal()] = true;
-			pressed[KeysMap.DOWN.ordinal()] = false;
-			break;
-		case DOWN:
-			pressed[KeysMap.DOWN.ordinal()] = true;
-			pressed[KeysMap.UP.ordinal()] = false;
+        switch (direction) {
+            case UP:
+                pressed[KeysMap.UP.ordinal()] = true;
+                pressed[KeysMap.DOWN.ordinal()] = false;
+                break;
 
-			break;
-		case LEFT:
-			pressed[KeysMap.LEFT.ordinal()] = true;
-			pressed[KeysMap.RIGHT.ordinal()] = false;
-			break;
-		case RIGHT:
-			pressed[KeysMap.RIGHT.ordinal()] = true;
-			pressed[KeysMap.LEFT.ordinal()] = false;
-			break;
-		case B0:
-			pressed[KeysMap.B0.ordinal()] = true;
-			break;
-		case B1:
-			pressed[KeysMap.B1.ordinal()] = true;
-		default:
-			pressed[direction.ordinal()] = true;
-		}
-	}
+            case DOWN:
+                pressed[KeysMap.DOWN.ordinal()] = true;
+                pressed[KeysMap.UP.ordinal()] = false;
+                break;
 
-	public void release(KeysMap direction) {
-		if (direction == null)
-			return;
+            case LEFT:
+                pressed[KeysMap.LEFT.ordinal()] = true;
+                pressed[KeysMap.RIGHT.ordinal()] = false;
+                break;
 
-		pressed[direction.ordinal()] = false;
+            case RIGHT:
+                pressed[KeysMap.RIGHT.ordinal()] = true;
+                pressed[KeysMap.LEFT.ordinal()] = false;
+                break;
 
-	}
+            case B0:
+                pressed[KeysMap.B0.ordinal()] = true;
+                break;
 
-	public void releaseAll() {
-		for (KeysMap k : KeysMap.values()) {
-			pressed[k.ordinal()] = false;
-		}
-	}
+            case B1:
+                pressed[KeysMap.B1.ordinal()] = true;
+                break;
 
-	public void consumeAll() {
-		for (KeysMap k : KeysMap.values()) {
-			pressed[k.ordinal()] = false;
-		}
-	}
+            default:
+                pressed[direction.ordinal()] = true;
+        }
+    }
 
-	public int[] getKeysCode() {
-		return keysCode;
-	}
+    public void release(KeysMap direction) {
+        if (direction == null) {
+            return;
+        }
 
-	public void setKeysCode(int[] keysCode) {
-		this.keysCode = keysCode;
-	}
+        pressed[direction.ordinal()] = false;
 
-	public char[] getKeysChar() {
-		return keysChar;
-	}
+    }
 
-	public void setKeysChar(char[] keysChar) {
-		this.keysChar = keysChar;
-	}
+    public void releaseAll() {
+        for (KeysMap k : KeysMap.values()) {
+            pressed[k.ordinal()] = false;
+        }
+    }
 
-	/**
-	 * Return true if the key was pressed and is the first time that read this
-	 * value
-	 * 
-	 * @param k
-	 * @return
-	 */
-	public boolean first(KeysMap k) {
-		if (pressed[k.ordinal()]) {
-			pressed[k.ordinal()] = false;
-			return true;
-		}
+    public void consumeAll() {
+        for (KeysMap k : KeysMap.values()) {
+            pressed[k.ordinal()] = false;
+        }
+    }
 
-		return false;
-	}
+    public int[] getKeysCode() {
+        return keysCode;
+    }
 
-	public boolean isKey(char keyChar, int keyCode, int idKeyMap) {
-		if (idKeyMap < 0)
-			return false;
+    public void setKeysCode(int[] keysCode) {
+        this.keysCode = keysCode;
+    }
 
-		if (idKeyMap < keysChar.length && Character.toLowerCase(keyChar) == Character.toLowerCase(keysChar[idKeyMap]))
-			return true;
+    public char[] getKeysChar() {
+        return keysChar;
+    }
 
-		if (idKeyMap < keysCode.length && keyCode == keysCode[idKeyMap])
-			return true;
+    public void setKeysChar(char[] keysChar) {
+        this.keysChar = keysChar;
+    }
 
-		return false;
-	}
+    /**
+     * Return true if the key was pressed and is the first time that read this
+     * value
+     *
+     * @param k
+     * @return
+     */
+    public boolean first(KeysMap k) {
+        if (pressed[k.ordinal()]) {
+            pressed[k.ordinal()] = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isKey(char keyChar, int keyCode, int idKeyMap) {
+        if (idKeyMap < 0) {
+            return false;
+        }
+
+        if (idKeyMap < keysChar.length && Character.toLowerCase(keyChar) == Character.toLowerCase(keysChar[idKeyMap])) {
+            return true;
+        }
+
+        if (idKeyMap < keysCode.length && keyCode == keysCode[idKeyMap]) {
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -4,87 +4,82 @@
  */
 package br.com.mvbos.jeg.scene;
 
-import java.awt.event.MouseEvent;
-
 /**
- * 
+ *
  * @author mbecker
  */
 public class Click {
 
-	private float px;
-	private float py;
-	private int button;
-	private int clickCount;
-	private MouseEvent event;
+    private float px;
+    private float py;
+    private short button;
+    private short clickCount;
 
-	public void setClick(int px, int py, int button, int clickCount) {
-		this.px = px;
-		this.py = py;
-		this.button = button;
-		this.clickCount = clickCount;
-	}
+    private boolean newClick;
 
-	public void setClick(float px, float py, int button, int clickCount) {
-		this.px = px;
-		this.py = py;
-		this.button = button;
-		this.clickCount = clickCount;
-	}
+    public void setClick(float px, float py, int button, int clickCount) {
+        this.px = px;
+        this.py = py;
+        this.button = (short) button;
+        this.clickCount = (short) clickCount;
+    }
 
-	public int getButton() {
-		return button;
-	}
+    public int getButton() {
+        return button;
+    }
 
-	public void setButton(int button) {
-		this.button = button;
-	}
+    public void setButton(int button) {
+        this.button = (short) button;
+    }
 
-	public int getClickCount() {
-		return clickCount;
-	}
+    public int getClickCount() {
+        return clickCount;
+    }
 
-	public void setClickCount(int clickCount) {
-		this.clickCount = clickCount;
-	}
+    public void setClickCount(int clickCount) {
+        this.clickCount = (short) clickCount;
+    }
 
-	public float getPx() {
-		return px;
-	}
+    public float getPx() {
+        return px;
+    }
 
-	public int getX() {
-		return (int) px;
-	}
+    public int getX() {
+        return (int) px;
+    }
 
-	public void setPx(float px) {
-		this.px = px;
-	}
+    public void setPx(float px) {
+        this.px = px;
+    }
 
-	public float getPy() {
-		return py;
-	}
+    public float getPy() {
+        return py;
+    }
 
-	public int getY() {
-		return (int) py;
-	}
+    public int getY() {
+        return (int) py;
+    }
 
-	public void setPy(float py) {
-		this.py = py;
-	}
+    public void setPy(float py) {
+        this.py = py;
+    }
 
-	@Override
-	public String toString() {
-		return "MouseClick{" + "px=" + px + ", py=" + py + ", button=" + button
-				+ ", clickCount=" + clickCount + '}';
-	}
+    @Override
+    public String toString() {
+        return "MouseClick{" + "px=" + px + ", py=" + py + ", button=" + button
+                + ", clickCount=" + clickCount + '}';
+    }
 
-	public MouseEvent getEvent() {
-		return event;
-	}
+    public void consume() {
+        newClick = false;
+    }
 
-	public void setEvent(MouseEvent event) {
-		this.event = event;
+    public boolean isNewClick() {
+        return newClick;
+    }
 
-	}
+    public void setNewClick(boolean newClick) {
+        this.newClick = newClick;
+    }
 
 }
