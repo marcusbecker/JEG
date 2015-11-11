@@ -2,7 +2,6 @@ package br.com.mvbos.jeg.scene;
 
 import java.awt.Graphics2D;
 
-import br.com.mvbos.jeg.element.ElementModel;
 import br.com.mvbos.jeg.window.IMemory;
 
 /**
@@ -19,7 +18,7 @@ public interface IScene {
 
     public IMemory[] getElements();
 
-    public void setElements(IMemory[] memory);
+    public void setElements(IMemory... memory);
 
     public String getTitle();
 
