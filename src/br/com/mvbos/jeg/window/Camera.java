@@ -156,7 +156,7 @@ public class Camera {
         }
     }
 
-    public void move(int nx, int ny) {
+    public void move(float nx, float ny) {
         /*
          * if (lck == LockType.ALL) { return; }
          */
@@ -241,5 +241,13 @@ public class Camera {
     public void offSet(int x, int y) {
         xOffset = (short) x;
         yOffset = (short) y;
+    }
+
+    public int getSceneWidth() {
+        return w;
+    }
+
+    public int getSceneHeight() {
+        return h;
     }
 }
