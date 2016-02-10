@@ -56,7 +56,7 @@ public class Camera {
     public Camera config(int sceneWidth, int sceneHeight, int screenWidth, int screeHeight) {
 
         if (sceneWidth + sceneHeight < screenWidth + screeHeight) {
-            throw new IllegalArgumentException("The screen size is more larger that the scene.");
+            throw new IllegalArgumentException("The screen size is more larger than scene.");
         }
 
         this.w = sceneWidth;
