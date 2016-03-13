@@ -175,4 +175,8 @@ public class GraphicTool {
         return eA.getPx() >= eB.getPx() && eA.getWidth() <= eB.getWidth() && eA.getPy() >= eB.getPy() && eA.getHeight() <= eB.getHeight();
     }
 
+    public void centerElement(ElementModel backElement, ElementModel frontElement) {
+        frontElement.setPxy(backElement.getPpx() + backElement.getHalfWidth(), backElement.getPpy() + backElement.getHalfHeight());
+    }
+
 }
