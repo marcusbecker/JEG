@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 import br.com.mvbos.jeg.element.ElementModel;
 import br.com.mvbos.jeg.engine.Engine;
+import br.com.mvbos.jeg.engine.GraphicTool;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -27,6 +28,8 @@ public class Camera {
     private boolean allowOffset;
 
     private boolean active = true;
+
+    private boolean autoFit = false;
 
     private static Camera c;
 
@@ -184,12 +187,15 @@ public class Camera {
     }
 
     public void draw(Graphics2D g, ElementModel el) {
+
+        if (autoFit && !GraphicTool.g().fit(Camera.c(), el)) {
+            return;
+        }
+
         if (active) {
             AffineTransform t = g.getTransform();
-
             g.translate(-cpx, -cpy);
             el.drawMe(g);
-
             g.setTransform(t);
         } else {
             el.drawMe(g);
@@ -250,4 +256,13 @@ public class Camera {
     public int getSceneHeight() {
         return h;
     }
+
+    public boolean isAutoFit() {
+        return autoFit;
+    }
+
+    public void setAutoFit(boolean autoFit) {
+        this.autoFit = autoFit;
+    }
+
 }

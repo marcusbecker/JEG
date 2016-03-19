@@ -2,6 +2,7 @@ package br.com.mvbos.jeg.engine;
 
 import br.com.mvbos.jeg.element.ElementModel;
 import br.com.mvbos.jeg.scene.Click;
+import br.com.mvbos.jeg.window.Camera;
 import br.com.mvbos.jeg.window.IMemory;
 
 public class GraphicTool {
@@ -177,6 +178,14 @@ public class GraphicTool {
 
     public void centerElement(ElementModel backElement, ElementModel frontElement) {
         frontElement.setPxy(backElement.getPpx() + backElement.getHalfWidth(), backElement.getPpy() + backElement.getHalfHeight());
+    }
+
+    public boolean fit(Camera cam, ElementModel el) {
+        if (cam == null || el == null) {
+            return false;
+        }
+
+        return intersecElement(cam.getPx(), cam.getPy(), el.getPpx(), el.getPpy(), cam.getSceneWidth(), cam.getSceneHeight(), el.getWidth(), el.getHeight());
     }
 
 }
