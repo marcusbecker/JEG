@@ -79,7 +79,7 @@ public class Camera implements Serializable {
     /**
      * Fix position x
      *
-     * @param px2
+     * @param px
      * @return
      */
     public int fx(float px) {
