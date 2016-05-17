@@ -6,12 +6,13 @@ import br.com.mvbos.jeg.element.ElementModel;
 import br.com.mvbos.jeg.engine.Engine;
 import br.com.mvbos.jeg.engine.GraphicTool;
 import java.awt.geom.AffineTransform;
+import java.io.Serializable;
 
 /**
  * @author mbecker
  *
  */
-public class Camera {
+public class Camera implements Serializable {
 
     private float cpx;
     private float cpy;
@@ -32,6 +33,10 @@ public class Camera {
     private boolean autoFit = false;
 
     private static Camera c;
+
+    public static synchronized void init() {
+        c = new Camera();
+    }
 
     public static Camera c() {
         if (c == null) {
@@ -78,7 +83,7 @@ public class Camera {
      * @return
      */
     public int fx(float px) {
-        return (int) (px - this.cpx);
+        return (int) (active ? px - this.cpx : px);
     }
 
     /**
@@ -88,7 +93,7 @@ public class Camera {
      * @return
      */
     public int fy(float py) {
-        return (int) (py - this.cpy);
+        return (int) (active ? py - this.cpy : py);
     }
 
     public float getCpx() {
