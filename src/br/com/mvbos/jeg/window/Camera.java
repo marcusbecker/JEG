@@ -214,22 +214,8 @@ public class Camera implements Serializable {
     }
 
     public void center(ElementModel el) {
-        cpx = el.getPx() - (Engine.getIWindowGame().getCanvasWidth() / 2);
-        cpy = el.getPy() - (Engine.getIWindowGame().getCanvasHeight() / 2);
-
-        if (cpx < 0) {
-            cpx = 0;
-
-        } else if (cpx > (w - Engine.getIWindowGame().getCanvasWidth())) {
-            cpx = w - Engine.getIWindowGame().getCanvasWidth();
-        }
-
-        if (cpy < 0) {
-            cpy = 0;
-
-        } else if (cpy > (h - Engine.getIWindowGame().getCanvasHeight())) {
-            cpy = h - Engine.getIWindowGame().getCanvasHeight();
-        }
+        cpx = el.getAllWidth() / 2 - scrw / 2;
+        cpy = el.getAllHeight() / 2 - scrh / 2;
     }
 
     /**
