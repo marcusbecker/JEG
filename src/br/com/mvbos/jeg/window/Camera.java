@@ -191,10 +191,16 @@ public class Camera implements Serializable {
 
     }
 
-    public void draw(Graphics2D g, ElementModel el) {
+    /**
+     * 
+     * @param g
+     * @param el
+     * @return true if method draw on ElementModel is called.
+     */
+    public boolean draw(Graphics2D g, ElementModel el) {
 
         if (autoFit && !GraphicTool.g().fit(Camera.c(), el)) {
-            return;
+            return false;
         }
 
         if (active) {
@@ -206,6 +212,7 @@ public class Camera implements Serializable {
             el.drawMe(g);
         }
 
+        return true;
     }
 
     @Override
