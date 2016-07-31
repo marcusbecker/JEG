@@ -7,30 +7,32 @@ package br.com.mvbos.jeg.window;
 import br.com.mvbos.jeg.element.ElementModel;
 
 /**
- * 
+ *
  * @author MBecker
  */
 public interface IMemory {
 
-	public ElementModel findElementById(int id);
+    public ElementModel findElementById(int id);
 
-	public ElementModel findElementByName(String name);
+    public ElementModel findElementByName(String name);
 
-	public void registerElement(ElementModel e);
+    public void registerElement(ElementModel e);
 
-	public void unRegisterElement(ElementModel e);
+    public void unRegisterElement(ElementModel e);
 
-	public void setBackGrountElement(ElementModel e);
+    public void setBackGrountElement(ElementModel e);
 
-	public ElementModel getBackground();
+    public ElementModel getBackground();
 
-	public ElementModel[] getElementList();
+    public ElementModel[] getElementList();
 
-	public ElementModel getByElement(int i);
+    public ElementModel getByElement(int i);
 
-	public int getElementCount();
+    public int getElementCount();
 
-	public void clear();
-	
-	public int getCapacity();
+    public void clear();
+
+    public void reset();
+
+    public int getCapacity();
 }
