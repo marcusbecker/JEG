@@ -72,6 +72,8 @@ public class Camera implements Serializable {
 
         this.scrw = (short) screenWidth;
         this.scrh = (short) screeHeight;
+        
+        cpx = cpy = 0;
 
         return this;
     }
@@ -192,7 +194,7 @@ public class Camera implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param g
      * @param el
      * @return true if method draw on ElementModel is called.
@@ -217,7 +219,7 @@ public class Camera implements Serializable {
 
     @Override
     public String toString() {
-        return "Camera [cpx=" + cpx + ", cpy=" + cpy + "]";
+        return "Camera{" + "cpx=" + cpx + ", cpy=" + cpy + ", w=" + w + ", h=" + h + ", scrw=" + scrw + ", scrh=" + scrh + ", xOffset=" + xOffset + ", yOffset=" + yOffset + ", allowOffset=" + allowOffset + ", active=" + active + ", autoFit=" + autoFit + '}';
     }
 
     public void center(ElementModel el) {
