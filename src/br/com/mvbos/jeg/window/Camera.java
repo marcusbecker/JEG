@@ -73,8 +73,6 @@ public class Camera implements Serializable {
         this.scrw = (short) screenWidth;
         this.scrh = (short) screeHeight;
         
-        cpx = cpy = 0;
-
         return this;
     }
 
@@ -223,8 +221,7 @@ public class Camera implements Serializable {
     }
 
     public void center(ElementModel el) {
-        cpx = el.getAllWidth() / 2 - scrw / 2;
-        cpy = el.getAllHeight() / 2 - scrh / 2;
+        move(el.getPx() - scrw / 2, el.getPy() - scrh / 2);
     }
 
     /**
