@@ -262,4 +262,16 @@ public class Camera implements Serializable {
         this.autoFit = autoFit;
     }
 
+    public void fixPosition(ElementModel el, float x, float y) {
+        el.setPxy(x + getCpx(), y + getCpy());
+    }
+
+    private float wZoom;
+    private float hZoom;
+
+    public void zoom(float wZoom, float hZoom) {
+        this.wZoom = wZoom;
+        this.hZoom = hZoom;
+    }
+
 }
