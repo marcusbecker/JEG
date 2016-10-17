@@ -9,15 +9,16 @@ import java.awt.Graphics2D;
  */
 public class SelectorElement extends ElementModel {
 
+    private int borderSpace = 5;
+
     public SelectorElement(String name) {
         this(Color.BLUE, name);
     }
 
     public SelectorElement(Color color, String name) {
-        this.setName(name);
-        this.setColor(color);
-
-        this.setEnabled(false);
+        super.setName(name);
+        super.setColor(color);
+        super.setEnabled(false);
     }
 
     @Override
@@ -78,4 +79,13 @@ public class SelectorElement extends ElementModel {
             setPy(temp);
         }
     }
+
+    public int getBorderSpace() {
+        return borderSpace;
+    }
+
+    public void setBorderSpace(int borderSpace) {
+        this.borderSpace = borderSpace;
+    }
+
 }
